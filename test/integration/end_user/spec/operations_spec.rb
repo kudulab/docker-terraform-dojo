@@ -42,5 +42,20 @@ context 'operations' do
       expect(output).to include('OS_USERNAME')
       expect(exit_status).to eq 0
     end
+    it 'any dot version is installed (graphviz)' do
+      cmd = "cd #{test_ide_work} && ide \"dot -V\""
+
+      output, exit_status = run_cmd(cmd)
+
+      expect(output).to include('dot - graphviz version')
+      expect(exit_status).to eq 0
+    end
+    it 'dot can generate png file without error' do
+      cmd = "cd #{test_ide_work} && ide \"dot -Tpng graph1.gv -o graph1.png\""
+
+      output, exit_status = run_cmd(cmd)
+
+      expect(exit_status).to eq 0
+    end
   end
 end

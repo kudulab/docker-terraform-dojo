@@ -10,3 +10,4 @@ bats-assert/
 
 # do not ignore those
 !**/dummy_work/.placeholder
+*.png

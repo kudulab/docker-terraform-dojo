@@ -1,6 +1,6 @@
 # docker-terraformide
 
-Produces IDE docker image with Terraform installed.
+Produces IDE docker image with Terraform and Graphviz installed.
 
 It was supposed to use ai_chefdev cookbook, but I decided to make it as
  easy as possible (and as small as possible to). Based on alpine docker image.
