@@ -1,8 +1,8 @@
 FROM terraformide_configs:temp
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=0.7.3
-ENV TERRAFORM_SHA256SUM=4e985f222ec99616e8c730d737c9b400f9d73bf0c436661ec888b2406d3a6f39
+ENV TERRAFORM_VERSION=0.7.13
+ENV TERRAFORM_SHA256SUM=5a4f762a194542d38406b9b92c722b57f7910344db084e24c9c43d7719f4aa18
 
 # font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
