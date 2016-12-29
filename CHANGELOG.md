@@ -1,3 +1,7 @@
+# 0.2.0 (29 Dec 2016)
+
+* #10293 install openssh-client
+
 # 0.1.1 (30 Nov 2016)
 
 * Terraform 0.7.13, because maybe it fixes https://github.com/hashicorp/terraform/issues/5200

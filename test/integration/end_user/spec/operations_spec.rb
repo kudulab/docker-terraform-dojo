@@ -57,5 +57,13 @@ context 'operations' do
 
       expect(exit_status).to eq 0
     end
+    it 'ssh client is installed' do
+      cmd = "cd #{test_ide_work} && ide \"ssh\""
+
+      output, exit_status = run_cmd(cmd)
+
+      expect(output).to include('usage: ssh')
+      expect(exit_status).to eq 255
+    end
   end
 end
