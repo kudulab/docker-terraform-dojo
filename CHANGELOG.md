@@ -1,3 +1,7 @@
+# 0.3.0 (30 Dec 2016)
+
+* terraform 0.8.2 due to conditional values, example: `count = "${var.env == "prod" ? 1 : 0}"`
+
 # 0.2.0 (29 Dec 2016)
 
 * #10293 install openssh-client
