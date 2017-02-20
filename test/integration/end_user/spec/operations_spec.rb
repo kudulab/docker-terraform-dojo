@@ -65,5 +65,13 @@ context 'operations' do
       expect(output).to include('usage: ssh')
       expect(exit_status).to eq 255
     end
+    it 'curl is installed' do
+      cmd = "cd #{test_ide_work} && ide \"curl -X GET -v 'consul.service.mosk.consul.ai-traders.com:8500/v1/kv/projects/'\""
+
+      output, exit_status = run_cmd(cmd)
+
+      expect(output).not_to include('curl: (48)')
+      expect(exit_status).to eq 0
+    end
   end
 end

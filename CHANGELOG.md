@@ -1,3 +1,7 @@
+# 0.4.0 (20 Feb 2017)
+
+* install curl
+
 # 0.3.0 (30 Dec 2016)
 
 * terraform 0.8.2 due to conditional values, example: `count = "${var.env == "prod" ? 1 : 0}"`

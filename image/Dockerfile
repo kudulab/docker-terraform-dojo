@@ -7,7 +7,9 @@ ENV TERRAFORM_SHA256SUM=a366fd2d7d8908d23acc23ab151fc692615a147f8832971bb43e4299
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
 # * openssh-client is needed in infra-ai_stc
-RUN apk add --update wget graphviz font-bitstream-type1 openssh-client
+# * curl-dev is needed for curl to work
+# * curl is needed to get next_version from Consul
+RUN apk add --update wget graphviz font-bitstream-type1 openssh-client curl curl-dev
 
 # faster way than official public:
 ADD http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip ./
