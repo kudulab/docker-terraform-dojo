@@ -1,4 +1,4 @@
-FROM terraformide_configs:temp
+FROM docker-registry.ai-traders.com/terraformide:temp
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
 ENV TERRAFORM_VERSION=0.9.11

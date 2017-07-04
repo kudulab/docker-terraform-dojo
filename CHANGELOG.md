@@ -1,3 +1,9 @@
+### 0.4.1 (2017-Jul-04)
+
+* Terraform 0.9.11
+* colorful bash prompt
+* for development: use releaser and docker-ops, no ruby
+
 # 0.4.0 (20 Feb 2017)
 
 * install curl

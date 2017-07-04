@@ -9,7 +9,7 @@ It was supposed to use ai_chefdev cookbook, but I decided to make it as
 1. Install [IDE](https://github.com/ai-traders/ide)
 2. Provide an Idefile:
 ```
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/terraformide:0.3.0"
+IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/terraformide:0.4.1"
 ```
 3. Run, example commands:
 ```bash
@@ -37,65 +37,22 @@ Those files are used inside gitide docker image:
 So that packeride and terraformide are similar and thus easier to maintain.
 
 ### Dependencies
-Bash, IDE, and Docker daemon. Needed is docker IDE image with:
-  * Docker daemon
-  * IDE (we run IDE in IDE; for end user tests)
-  * ruby
+* Bash
+* Docker daemon
+* Ide
 
-All the below tests are supposed to be invoked inside an IDE docker image:
-```bash
-ide
-bundle install
-```
-
-### Fast tests
-```bash
-# Run repocritic linting.
-bundle exec rake style
-
-# Build a docker image with IDE configs only and test it
-bundle exec rake build_configs_image && bundle exec rake test_ide_configs
-```
-
-**OR** you can run those (Test-Kitchen) tests also this way (1 tests suite example):
-```bash
-bundle exec kitchen converge configs-docker
-bundle exec kitchen verify configs-docker
-bundle exec kitchen destroy configs-docker
-```
-
-Here `.kitchen.yml` is used.
-```
-
-
-### Build
-Build docker image. This will generate imagerc file.
-
-```bash
-bundle exec rake build
-```
-
-### Long tests
-Having built the docker image, there are 2 kind of tests available:
-
-```bash
-# Test-Kitchen tests, test that IDE configs are set and that system packages are
-# installed
-bundle exec rake kitchen
-
-
-# RSpec tests invoke ide command using Idefiles and the just built docker
-# image
-bundle exec rake install_ide
-bundle exec rake end_user
-```
-
-**OR** you can run Test-Kitchen tests also this way:
-```bash
-source image/imagerc
-KITCHEN_YAML="/ide/work/.kitchen.image.yml" bundle exec kitchen converge configs
-KITCHEN_YAML="/ide/work/.kitchen.image.yml" bundle exec kitchen verify configs
-KITCHEN_YAML="/ide/work/.kitchen.image.yml" bundle exec kitchen destroy configs
-```
-
-Here `.kitchen.image.yml` is used.
+### Lifecycle
+1. In a feature branch:
+ * you make changes
+ * and run tests:
+     * `./tasks build`
+     * `./tasks itest`
+1. You decide that your changes are ready and you:
+ * merge into master branch
+ * run locally:
+   * `./tasks set_version` to set version in CHANGELOG and chart version files to
+   the version from OVersion backend
+   * e.g. `./tasks set_version 1.2.3` to set version in CHANGELOG and chart version
+    files and in OVersion backend to 1.2.3
+ * push to master onto private git server
+1. CI server (GoCD) tests and releases.
