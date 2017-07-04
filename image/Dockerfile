@@ -11,6 +11,10 @@ ENV TERRAFORM_SHA256SUM=804d31cfa5fee5c2b1bff7816b64f0e26b1d766ac347c67091adccc2
 # * curl is needed to get next_version from Consul
 RUN apk add --update wget graphviz font-bitstream-type1 openssh-client curl curl-dev
 
+# pretty bash prompt
+COPY bashrc /home/ide/.bashrc
+RUN chown ide:ide /home/ide/.bashrc
+
 # faster way than official public:
 ADD http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip ./
 ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS ./

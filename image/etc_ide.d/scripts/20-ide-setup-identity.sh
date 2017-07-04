@@ -35,6 +35,11 @@ Host gitlab.ai-traders.com
 User git
 Port 2222
 IdentityFile ${ide_home}/.ssh/id_rsa
+
+Host gogs.ai-traders.com
+User git
+Port 2222
+IdentityFile ${ide_home}/.ssh/id_rsa
 " > "${ide_home}/.ssh/config"
 
 # not obligatory configuration file
@@ -47,4 +52,14 @@ fi
 # Do not copy it from $ide_identity, because it may reference sth not installed in
 # this docker image.
 touch "${ide_home}/.profile"
-echo "cd ${ide_work}" > "${ide_home}/.profile"
+
+echo "
+# if running bash
+if [ -n \"\$BASH_VERSION\" ]; then
+    # include .bashrc if it exists
+    if [ -f \"\$HOME/.bashrc\" ]; then
+	. \"\$HOME/.bashrc\"
+    fi
+fi
+cd \"\${ide_work}\"
+" > "${ide_home}/.profile"
