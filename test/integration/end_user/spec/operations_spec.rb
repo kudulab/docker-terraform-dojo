@@ -30,7 +30,7 @@ context 'operations' do
 
       output, exit_status = run_cmd(cmd)
 
-      expect(output).to include('Terraform v0.8.2')
+      expect(output).to include('Terraform v0.9.11')
       expect(exit_status).to eq 0
     end
     it 'openstack env variables are preserved' do
