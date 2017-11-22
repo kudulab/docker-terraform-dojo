@@ -1,3 +1,8 @@
+### 0.4.2 (2017-Nov-22)
+
+* IDE 0.9.0
+* fix this_image_tag environment variable #11928
+
 ### 0.4.1 (2017-Jul-04)
 
 * Terraform 0.9.11

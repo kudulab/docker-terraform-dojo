@@ -2,7 +2,7 @@
 
 set -e
 if [[ ! -f ./releaser ]];then
-  wget --quiet http://http.archive.ai-traders.com/releaser/1.0.0/releaser
+  wget --quiet http://http.archive.ai-traders.com/releaser/1.0.3/releaser
 fi
 source ./releaser
 if [[ ! -f ./docker-ops ]];then
@@ -18,18 +18,6 @@ image_name="docker-registry.ai-traders.com/terraformide"
 tmp_image="${image_name}:temp"
 image_dir="./image"
 imagerc_filename="imagerc"
-
-function source_imagerc {
-  source "${image_dir}/${imagerc_filename}"
-  if [[ -z "AIT_DOCKER_IMAGE_NAME" ]]; then
-    echo "fail! AIT_DOCKER_IMAGE_NAME not set"
-    return 1
-  fi
-  if [[ -z "AIT_DOCKER_IMAGE_TAG" ]]; then
-    echo "fail! AIT_DOCKER_IMAGE_TAG not set"
-    return 1
-  fi
-}
 
 command="$1"
 case "${command}" in
@@ -73,7 +61,7 @@ case "${command}" in
       exit $?
       ;;
   itest)
-      source_imagerc
+      source_imagerc "${image_dir}"  "${imagerc_filename}"
       echo "Testing image: ${AIT_DOCKER_IMAGE_NAME}:${AIT_DOCKER_IMAGE_TAG}"
       echo "IDE_DOCKER_IMAGE=\"${AIT_DOCKER_IMAGE_NAME}:${AIT_DOCKER_IMAGE_TAG}\"" > ./Idefile.to_be_tested
       echo "IDE_IDENTITY=\"$(pwd)/test/integration/identities/full\"" >> ./Idefile.to_be_tested

@@ -8,7 +8,8 @@ load '/opt/bats-assert/load.bash'
   assert_line --partial "ide init finished"
   assert_line --partial "/ide/work"
   assert_line --partial "terraformide"
-  refute_output "root"
+  refute_output --partial "IMAGE_VERSION"
+  refute_output --partial "root"
   assert_equal "$status" 0
 }
 @test "correct terraform version is installed" {

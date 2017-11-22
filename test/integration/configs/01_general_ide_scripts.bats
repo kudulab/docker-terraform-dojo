@@ -47,5 +47,5 @@ load '/opt/bats-assert/load.bash'
   # this is printed on test failure
   echo "output: $output"
   assert_equal "$status" 0
-  refute_output "root"
+  refute_output --partial "root"
 }
