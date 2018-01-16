@@ -1,3 +1,7 @@
+### 0.4.3 (2018-Jan-16)
+
+* Terraform 0.10.8 - for salt-masterless provider
+
 ### 0.4.2 (2017-Nov-22)
 
 * IDE 0.9.0

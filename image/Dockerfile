@@ -1,8 +1,8 @@
 FROM docker-registry.ai-traders.com/terraformide:temp
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=0.9.11
-ENV TERRAFORM_SHA256SUM=804d31cfa5fee5c2b1bff7816b64f0e26b1d766ac347c67091adccc2626e16f3
+ENV TERRAFORM_VERSION=0.10.8
+ENV TERRAFORM_SHA256SUM=b786c0cf936e24145fad632efd0fe48c831558cc9e43c071fffd93f35e3150db
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
