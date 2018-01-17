@@ -9,22 +9,6 @@ pipelines:
         blacklist:
           - "**/*.md"
     stages:
-      - test_configs:
-          clean_workspace: true
-          jobs:
-            docker_image:
-              elastic_profile_id: w.c1.m1024.e5
-              tasks:
-               - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks verify_version
-               - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks build_cfg && ./tasks test_cfg
       - build:
           clean_workspace: true
           jobs:
@@ -39,7 +23,12 @@ pipelines:
                   command: /bin/bash
                   arguments:
                     - -c
-                    - ./tasks build_cfg && ops_docker_push=true ./tasks build
+                    - ./tasks verify_version
+               - exec:
+                  command: /bin/bash
+                  arguments:
+                    - -c
+                    - ops_docker_push=true ./tasks build
       - itest:
           clean_workspace: true
           jobs:

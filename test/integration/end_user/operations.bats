@@ -26,7 +26,7 @@ load '/opt/bats-assert/load.bash'
   assert_line --partial "OS_USERNAME"
   assert_equal "$status" 0
 }
-@test "any dot version is installed (graphviz)d" {
+@test "any dot version is installed (graphviz)" {
   run /bin/bash -c "ide --idefile Idefile.to_be_tested \"dot -V\""
   # this is printed on test failure
   echo "output: $output"
@@ -51,5 +51,22 @@ load '/opt/bats-assert/load.bash'
   # this is printed on test failure
   echo "output: $output"
   assert_line --partial "curl"
+  assert_equal "$status" 0
+}
+@test "git is installed" {
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"git --version\""
+  # this is printed on test failure
+  echo "output: $output"
+  assert_output --partial "git version"
+  assert_equal "$status" 0
+}
+# when running the first time in the terraform directory, you have to run
+# `terraform init`, so that it creates lock.json file
+@test "terraform plugins are installed - openstack vm and null_resource" {
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"cd openstack_vm && terraform plan\""
+  # this is printed on test failure
+  echo "output: $output"
+  refute_output --partial "error"
+  refute_output --partial "no suitable version installed"
   assert_equal "$status" 0
 }

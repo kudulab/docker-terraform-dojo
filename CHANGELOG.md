@@ -1,3 +1,8 @@
+### 0.5.0 (2018-Jan-17)
+
+* no temp docker image, so that we can use docker cache better
+* install some terraform plugins, as terraform architecture changed in 0.10.0
+
 ### 0.4.3 (2018-Jan-16)
 
 * Terraform 0.10.8 - for salt-masterless provider
