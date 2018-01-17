@@ -9,7 +9,7 @@ It was supposed to use ai_chefdev cookbook, but I decided to make it as
 1. Install [IDE](https://github.com/ai-traders/ide)
 2. Provide an Idefile:
 ```
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/terraformide:0.5.0"
+IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/terraformide:0.5.1"
 ```
 3. Run, example commands:
 ```bash

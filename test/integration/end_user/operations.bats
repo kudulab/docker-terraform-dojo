@@ -16,7 +16,7 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "ide --idefile Idefile.to_be_tested \"terraform --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "Terraform v0.10.8"
+  assert_line --partial "Terraform v0.11.2"
   assert_equal "$status" 0
 }
 @test "openstack env variables are preserved" {

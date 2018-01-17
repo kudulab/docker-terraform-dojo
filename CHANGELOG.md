@@ -1,3 +1,7 @@
+### 0.5.1 (2018-Jan-17)
+
+* Terraform 0.11.2
+
 ### 0.5.0 (2018-Jan-17)
 
 * no temp docker image, so that we can use docker cache better
