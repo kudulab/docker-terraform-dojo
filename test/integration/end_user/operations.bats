@@ -70,3 +70,10 @@ load '/opt/bats-assert/load.bash'
   refute_output --partial "no suitable version installed"
   assert_equal "$status" 0
 }
+@test "jq is installed" {
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"jq\""
+  # this is printed on test failure
+  echo "output: $output"
+  assert_output --partial "jq is a tool for processing JSON"
+  assert_equal "$status" 2
+}

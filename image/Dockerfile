@@ -36,6 +36,14 @@ RUN apk add --update wget graphviz font-bitstream-type1 openssh-client curl curl
 COPY bashrc /home/ide/.bashrc
 RUN chown ide:ide /home/ide/.bashrc
 
+# install jq to parse json in bash
+RUN export wget_options="--tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force" &&\
+  bash -c "\
+    wget ${wget_options} http://http.archive.ai-traders.com/jq/v1.5/jq-linux64 ||\
+    wget ${wget_options} https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64" &&\
+  chmod +x ./jq-linux64 &&\
+  mv ./jq-linux64 /usr/bin/jq
+
 # faster way than official public:
 ADD http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip ./
 ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS ./
