@@ -1,3 +1,7 @@
+### 0.6.1 (2018-Sep-27)
+
+* install newer terraform-provider-openstack: 1.9.0 #16592
+
 ### 0.6.0 (2018-Apr-14)
 
 * install jq #12502

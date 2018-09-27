@@ -55,9 +55,9 @@ RUN rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
 RUN mkdir -p /home/ide/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
-  wget https://releases.hashicorp.com/terraform-provider-openstack/1.1.0/terraform-provider-openstack_1.1.0_linux_amd64.zip &&\
-  unzip terraform-provider-openstack_1.1.0_linux_amd64.zip &&\
-  rm terraform-provider-openstack_1.1.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-openstack/1.9.0/terraform-provider-openstack_1.9.0_linux_amd64.zip &&\
+  unzip terraform-provider-openstack_1.9.0_linux_amd64.zip &&\
+  rm terraform-provider-openstack_1.9.0_linux_amd64.zip &&\
   mv terraform-provider-openstack* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-null/1.0.0/terraform-provider-null_1.0.0_linux_amd64.zip &&\
