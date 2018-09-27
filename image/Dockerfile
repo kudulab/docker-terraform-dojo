@@ -65,9 +65,9 @@ RUN mkdir -p /home/ide/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   rm terraform-provider-null_1.0.0_linux_amd64.zip &&\
   mv terraform-provider-null* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-consul/1.0.0/terraform-provider-consul_1.0.0_linux_amd64.zip &&\
-  unzip terraform-provider-consul_1.0.0_linux_amd64.zip &&\
-  rm terraform-provider-consul_1.0.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-consul/2.1.0/terraform-provider-consul_2.1.0_linux_amd64.zip &&\
+  unzip terraform-provider-consul_2.1.0_linux_amd64.zip &&\
+  rm terraform-provider-consul_2.1.0_linux_amd64.zip &&\
   mv terraform-provider-consul* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-external/1.0.0/terraform-provider-external_1.0.0_linux_amd64.zip &&\

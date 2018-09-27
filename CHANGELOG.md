@@ -1,6 +1,7 @@
 ### 0.6.1 (2018-Sep-27)
 
 * install newer terraform-provider-openstack: 1.9.0 #16592
+* install newer terraform-provider-consul 2.1.0
 
 ### 0.6.0 (2018-Apr-14)
 
