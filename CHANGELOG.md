@@ -1,3 +1,6 @@
+* in Dockerfile parameterize terraform plugins versions, so that they are not
+ repeated 4 times
+
 ### 0.6.1 (2018-Sep-27)
 
 * install newer terraform-provider-openstack: 1.9.0 #16592

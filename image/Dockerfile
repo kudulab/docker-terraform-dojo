@@ -54,35 +54,41 @@ RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin
 RUN rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
+ENV TF_PROVIDER_CONSUL_VERSION="2.1.0" \
+  TF_PROVIDER_OPENSTACK_VERSION="1.9.0" \
+  TF_PROVIDER_NULL_VERSION="1.0.0" \
+  TF_PROVIDER_EXTERNAL_VERSION="1.0.0" \
+  TF_PROVIDER_LOCAL_VERSION="1.1.0" \
+  TF_PROVIDER_TEMPLATE_VERSION="1.0.0"
 RUN mkdir -p /home/ide/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
-  wget https://releases.hashicorp.com/terraform-provider-openstack/1.9.0/terraform-provider-openstack_1.9.0_linux_amd64.zip &&\
-  unzip terraform-provider-openstack_1.9.0_linux_amd64.zip &&\
-  rm terraform-provider-openstack_1.9.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-openstack* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-null/1.0.0/terraform-provider-null_1.0.0_linux_amd64.zip &&\
-  unzip terraform-provider-null_1.0.0_linux_amd64.zip &&\
-  rm terraform-provider-null_1.0.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-null/${TF_PROVIDER_NULL_VERSION}/terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-null* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-consul/2.1.0/terraform-provider-consul_2.1.0_linux_amd64.zip &&\
-  unzip terraform-provider-consul_2.1.0_linux_amd64.zip &&\
-  rm terraform-provider-consul_2.1.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-consul/${TF_PROVIDER_CONSUL_VERSION}/terraform-provider-consul_${TF_PROVIDER_CONSUL_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-consul_${TF_PROVIDER_CONSUL_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-consul_${TF_PROVIDER_CONSUL_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-consul* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-external/1.0.0/terraform-provider-external_1.0.0_linux_amd64.zip &&\
-  unzip terraform-provider-external_1.0.0_linux_amd64.zip &&\
-  rm terraform-provider-external_1.0.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-external/${TF_PROVIDER_EXTERNAL_VERSION}/terraform-provider-external_${TF_PROVIDER_EXTERNAL_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-external_${TF_PROVIDER_EXTERNAL_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-external_${TF_PROVIDER_EXTERNAL_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-external* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-local/1.1.0/terraform-provider-local_1.1.0_linux_amd64.zip &&\
-  unzip terraform-provider-local_1.1.0_linux_amd64.zip &&\
-  rm terraform-provider-local_1.1.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-local/${TF_PROVIDER_LOCAL_VERSION}/terraform-provider-local_${TF_PROVIDER_LOCAL_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-local_${TF_PROVIDER_LOCAL_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-local_${TF_PROVIDER_LOCAL_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-local* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-template/1.0.0/terraform-provider-template_1.0.0_linux_amd64.zip &&\
-  unzip terraform-provider-template_1.0.0_linux_amd64.zip &&\
-  rm terraform-provider-template_1.0.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-template/${TF_PROVIDER_TEMPLATE_VERSION}/terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-template* /home/ide/.terraform.d/plugins/linux_amd64 &&\
 
   chown ide:ide -R /home/ide/.terraform.d/
