@@ -1,9 +1,7 @@
 # docker-terraformide
 
-Produces IDE docker image with Terraform and Graphviz installed.
-
-It was supposed to use ai_chefdev cookbook, but I decided to make it as
- easy as possible (and as small as possible to). Based on alpine docker image.
+IDE docker image with Terraform and Graphviz installed.
+Based on alpine docker image.
 
 ## Usage
 1. Install [IDE](https://github.com/ai-traders/ide)
@@ -31,6 +29,11 @@ Those files are used inside gitide docker image:
 4. Environment variables must be locally set:
  `[ 'OS_AUTH_URL', 'OS_TENANT_NAME', 'OS_USERNAME',
    'OS_PASSWORD']`. Ide will pass them to packeride.
+
+To enable debug output:
+```
+OS_DEBUG=1 TF_LOG=debug
+```
 
 ## Development
 

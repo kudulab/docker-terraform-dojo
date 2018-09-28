@@ -1,10 +1,10 @@
 pipelines:
   docker-terraformide:
-    group: chef
-    label_template: "${git[:8]}"
+    group: platform
+    label_template: "${COUNT}-${git[:8]}"
     materials:
       git:
-        git: "git@git.ai-traders.com:chef/docker-terraformide.git"
+        git: "git@git.ai-traders.com:platform/docker-terraformide.git"
         branch: master
         blacklist:
           - "**/*.md"
