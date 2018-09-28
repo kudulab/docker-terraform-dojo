@@ -1,5 +1,8 @@
+### 0.6.2 (2018-Sep-28)
+
 * in Dockerfile parameterize terraform plugins versions, so that they are not
  repeated 4 times
+* terraform 0.11.10
 
 ### 0.6.1 (2018-Sep-27)
 

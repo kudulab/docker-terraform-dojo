@@ -22,8 +22,8 @@ ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["/bin/bash"]
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=0.11.2
-ENV TERRAFORM_SHA256SUM=f728fa73ff2a4c4235a28de4019802531758c7c090b6ca4c024d48063ab8537b
+ENV TERRAFORM_VERSION=0.11.10
+ENV TERRAFORM_SHA256SUM=43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -44,14 +44,13 @@ RUN export wget_options="--tries=3 --retry-connrefused --wait=3 --random-wait --
   chmod +x ./jq-linux64 &&\
   mv ./jq-linux64 /usr/bin/jq
 
-# faster way than official public:
-ADD http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip ./
-ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS ./
-
-RUN sed -i '/terraform_${TERRAFORM_VERSION}_linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS
-RUN sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS
-RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin
-RUN rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+# download from private endpoint to make it faster than from public endpoint:
+RUN wget http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
+  sed -i '/terraform_${TERRAFORM_VERSION}_linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
+  sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
+  unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin &&\
+  rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
 ENV TF_PROVIDER_CONSUL_VERSION="2.1.0" \
