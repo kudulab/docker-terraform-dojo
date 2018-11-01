@@ -4,6 +4,7 @@
  repeated 4 times
 * terraform 0.11.10
 * `TF_PROVIDER_OPENSTACK_VERSION="1.11.0"` #16595 (openstack provider configuration is overridden)
+* fix: itests now require less human work
 
 ### 0.6.1 (2018-Sep-27) - do not use because of #16595 (openstack provider configuration is overridden)
 

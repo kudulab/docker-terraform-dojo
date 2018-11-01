@@ -60,10 +60,8 @@ load '/opt/bats-assert/load.bash'
   assert_output --partial "git version"
   assert_equal "$status" 0
 }
-# when running the first time in the terraform directory, you have to run
-# `terraform init`, so that it creates lock.json file
 @test "terraform plugins are installed - openstack vm and null_resource" {
-  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"cd openstack_vm && terraform plan\""
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"cd openstack_vm && rm -rf ./.terraform && terraform init && terraform get && terraform plan\""
   # this is printed on test failure
   echo "output: $output"
   refute_output --partial "error"
