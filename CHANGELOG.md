@@ -1,3 +1,7 @@
+### 0.6.3 (2018-Nov-26)
+
+* when building docker image, take version from source code (not next_version)
+
 ### 0.6.2 (2018-Nov-1)
 
 * in Dockerfile parameterize terraform plugins versions, so that they are not
