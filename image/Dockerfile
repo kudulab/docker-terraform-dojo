@@ -1,7 +1,7 @@
 # We could start FROM hashicorp/packer:light,
 # https://hub.docker.com/r/hashicorp/packer/tags/
 # but we want to lock Packer version.
-FROM alpine:3.5
+FROM alpine:3.8
 
 ############
 # For ide:
@@ -46,7 +46,7 @@ RUN export wget_options="--tries=3 --retry-connrefused --wait=3 --random-wait --
 
 # download from private endpoint to make it faster than from public endpoint:
 RUN wget http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip &&\
-  wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
+  wget -O terraform_${TERRAFORM_VERSION}_SHA256SUMS https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
   sed -i '/terraform_${TERRAFORM_VERSION}_linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
   sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
   unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin &&\

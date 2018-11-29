@@ -1,4 +1,5 @@
 * use ide image scripts 0.10.5
+* use newer base image alpine:3.8
 
 ### 0.6.3 (2018-Nov-26)
 
