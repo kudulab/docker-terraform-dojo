@@ -47,8 +47,8 @@ RUN export wget_options="--tries=3 --retry-connrefused --wait=3 --random-wait --
 # download from private endpoint to make it faster than from public endpoint:
 RUN wget http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip &&\
   wget -O terraform_${TERRAFORM_VERSION}_SHA256SUMS https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
-  sed -i '/terraform_${TERRAFORM_VERSION}_linux_amd64.zip/!d' terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
-  sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
+  cat terraform_${TERRAFORM_VERSION}_SHA256SUMS | grep linux_amd64 > mySHA256SUM.txt &&\
+  sha256sum -cs mySHA256SUM.txt &&\
   unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin &&\
   rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
