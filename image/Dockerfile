@@ -9,7 +9,7 @@ FROM alpine:3.5
 # * git is needed to install ide image configs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git && \
-  git clone --depth 1 -b 0.9.0 https://github.com/ai-traders/ide.git /tmp/ide_git && \
+  git clone --depth 1 -b 0.10.5 https://github.com/ai-traders/ide.git /tmp/ide_git && \
   /tmp/ide_git/ide_image_scripts/src/install.sh && \
   rm -r /tmp/ide_git && \
   echo 'ide ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers

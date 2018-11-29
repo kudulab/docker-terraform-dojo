@@ -1,3 +1,5 @@
+* use ide image scripts 0.10.5
+
 ### 0.6.3 (2018-Nov-26)
 
 * when building docker image, take version from source code (not next_version)
