@@ -5,9 +5,9 @@ Based on alpine docker image.
 
 ## Usage
 1. Install [IDE](https://github.com/ai-traders/ide)
-2. Provide an Idefile:
+2. Provide an Dojofile:
 ```
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/terraformide:0.5.1"
+DOJO_DOCKER_IMAGE="docker-registry.ai-traders.com/terraformide:0.5.1"
 ```
 3. Run, example commands:
 ```bash
@@ -15,7 +15,7 @@ ide terraform --version
 ide "terraform init && terraform plan"
 ```
 
-By default, current directory in docker container is `/ide/work`.
+By default, current directory in docker container is `/dojo/work`.
 
 ### Configuration
 Those files are used inside gitide docker image:
@@ -25,7 +25,7 @@ Those files are used inside gitide docker image:
  (but the whole `~/.ssh` will be copied)
 2. `~/.gitconfig` -- if exists locally, will be copied
 3. `~/.profile` -- will be generated on docker container start, in
-   order to ensure current directory is `/ide/work`.
+   order to ensure current directory is `/dojo/work`.
 4. Environment variables must be locally set:
  `[ 'OS_AUTH_URL', 'OS_TENANT_NAME', 'OS_USERNAME',
    'OS_PASSWORD']`. Ide will pass them to packeride.

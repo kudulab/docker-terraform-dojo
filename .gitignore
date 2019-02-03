@@ -1,6 +1,7 @@
 imagerc*
 releaser
 docker-ops
-Idefile.to_be_tested*
-Idefile.example
+Dojofile.to_be_tested*
+Dojofile.example
 .terraform
+*.png

@@ -1,3 +1,5 @@
+* transform from ide docker image to dojo docker image #17139
+
 ### 0.6.4 (2018-Nov-29)
 
 * use ide image scripts 0.10.5
