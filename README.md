@@ -28,7 +28,7 @@ Those files are used inside gitide docker image:
    order to ensure current directory is `/dojo/work`.
 4. Environment variables must be locally set:
  `[ 'OS_AUTH_URL', 'OS_TENANT_NAME', 'OS_USERNAME',
-   'OS_PASSWORD']`. Ide will pass them to packeride.
+   'OS_PASSWORD']`. Dojo will pass them to the docker image.
 
 To enable debug output:
 ```
@@ -43,7 +43,7 @@ So that packeride and terraformide are similar and thus easier to maintain.
 ### Dependencies
 * Bash
 * Docker daemon
-* Ide
+* Dojo
 
 ### Lifecycle
 1. In a feature branch:
@@ -54,9 +54,7 @@ So that packeride and terraformide are similar and thus easier to maintain.
 1. You decide that your changes are ready and you:
  * merge into master branch
  * run locally:
-   * `./tasks set_version` to set version in CHANGELOG and chart version files to
-   the version from OVersion backend
-   * e.g. `./tasks set_version 1.2.3` to set version in CHANGELOG and chart version
-    files and in OVersion backend to 1.2.3
+   * `./tasks set_version` to set version in CHANGELOG, bump patch version
+   * e.g. `./tasks set_version 1.2.3` to set version in CHANGELOG to 1.2.3
  * push to master onto private git server
 1. CI server (GoCD) tests and releases.

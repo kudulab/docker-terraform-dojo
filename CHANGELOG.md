@@ -1,3 +1,8 @@
+### 0.7.1 (2019-Feb-03)
+
+* newer releaser and docker-ops
+* do not use oversion
+
 ### 0.7.0 (2019-Feb-03)
 
 * transform from ide docker image to dojo docker image #17139
