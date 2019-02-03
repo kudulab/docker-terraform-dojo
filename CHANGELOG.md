@@ -1,3 +1,5 @@
+### 0.7.0 (2019-Feb-03)
+
 * transform from ide docker image to dojo docker image #17139
 
 ### 0.6.4 (2018-Nov-29)
