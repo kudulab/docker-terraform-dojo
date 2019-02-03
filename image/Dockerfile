@@ -94,8 +94,3 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   chown dojo:dojo -R /home/dojo/.terraform.d/
 COPY terraformrc /home/dojo/.terraformrc
 RUN chown dojo:dojo /home/dojo/.terraformrc
-
-
-ARG this_image_tag_arg
-ARG this_image_name_arg
-ENV this_image_tag=${this_image_tag_arg} this_image_name=${this_image_name_arg}
