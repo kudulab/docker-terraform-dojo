@@ -1,3 +1,7 @@
+### 0.8.0 (2019-Apr-15)
+
+ * added AWS plugin
+
 ### 0.7.1 (2019-Feb-03)
 
 * newer releaser and docker-ops

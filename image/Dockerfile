@@ -56,6 +56,7 @@ RUN wget http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSIO
 # install plugins
 ENV TF_PROVIDER_CONSUL_VERSION="2.1.0" \
   TF_PROVIDER_OPENSTACK_VERSION="1.11.0" \
+  TF_PROVIDER_AWS_VERSION="2.6.0" \
   TF_PROVIDER_NULL_VERSION="1.0.0" \
   TF_PROVIDER_EXTERNAL_VERSION="1.0.0" \
   TF_PROVIDER_LOCAL_VERSION="1.1.0" \
@@ -65,6 +66,12 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   unzip terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-openstack* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+
+  mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
+  wget https://releases.hashicorp.com/terraform-provider-aws/${TF_PROVIDER_AWS_VERSION}/terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
+  mv terraform-provider-aws* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-null/${TF_PROVIDER_NULL_VERSION}/terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
