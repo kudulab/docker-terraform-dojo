@@ -1,21 +1,25 @@
 #!/bin/bash
 
 set -Eeuo pipefail
-if [[ ! -f ./releaser ]]; then
-  wget --quiet http://http.archive.ai-traders.com/releaser/1.1.0/releaser || { echo "Cannot download releaser, ignoring."; }
-fi
-if [[ -f ./releaser ]]; then
-  source ./releaser
-fi
-if [[ ! -f ./docker-ops ]];then
-  wget --quiet http://http.archive.ai-traders.com/docker-ops/0.3.3/docker-ops || { echo "Cannot download docker-ops, ignoring."; }
-fi
-if [[ -f ./docker-ops ]];then
-  source ./docker-ops
-fi
 
-image_name="terraformide"
-image_registry="docker-registry.ai-traders.com"
+RELEASER_VERSION="2.0.0"
+DOCKER_OPS_VERSION="2.0.0"
+
+RELEASER_FILE=".ops/releaser-${RELEASER_VERSION}"
+DOCKER_OPS_FILE=".ops/docker-ops-${DOCKER_OPS_VERSION}"
+
+mkdir -p .ops
+if [[ ! -f $RELEASER_FILE ]];then
+  wget --quiet -O $RELEASER_FILE https://github.com/kudulab/releaser/releases/download/${RELEASER_VERSION}/releaser
+fi
+source $RELEASER_FILE
+if [[ ! -f $DOCKER_OPS_FILE ]];then
+  wget --quiet -O $DOCKER_OPS_FILE https://github.com/kudulab/docker-ops/releases/download/${DOCKER_OPS_VERSION}/docker-ops
+fi
+source $DOCKER_OPS_FILE
+
+image_name="kudulab/terraform-dojo"
+image_registry="dockerhub"
 image_dir="./image"
 imagerc_filename="imagerc"
 
@@ -30,32 +34,28 @@ case "${command}" in
         next_version=$(releaser::bump_patch_version "${version}")
       fi
       releaser::set_version_in_changelog "${changelog_file}" "${next_version}"
-      exit $?
       ;;
   verify_version)
       releaser::verify_changelog_version
-      exit $?
       ;;
   build)
       image_tag=$(git rev-parse HEAD)
-      ( set -x; cd "${image_dir}"; docker build -t "${image_name}:${image_tag}" .; )
-      docker_ops::create_imagerc "${image_dir}" "${imagerc_filename}" "${image_name}" "${image_tag}" "${image_registry}"
-      docker_ops::push_tmp "${image_name}" "${image_tag}" "${image_registry}"
-      exit $?
+      # build image and push to a test registry
+      docker_ops::docker_build "${image_dir}" "${imagerc_filename}" "${image_name}" "${image_tag}" "${image_registry}"
+      docker_ops::push "${image_dir}" "${imagerc_filename}"
       ;;
   itest)
-      docker_ops::ensure_temp_image "${image_dir}" "${imagerc_filename}"
-      echo "Testing image: ${AIT_DOCKER_IMAGE_URL}"
-      echo "DOJO_DOCKER_IMAGE=\"${AIT_DOCKER_IMAGE_URL}\"" > ./Dojofile.to_be_tested
+      docker_ops::ensure_pulled_image "${image_dir}" "${imagerc_filename}"
+      echo "Testing image: ${KUDU_DOCKER_IMAGE_URL}"
+      echo "DOJO_DOCKER_IMAGE=\"${KUDU_DOCKER_IMAGE_URL}\"" > ./Dojofile.to_be_tested
       echo "DOJO_IDENTITY_OUTER=\"$(pwd)/test/integration/identities/full\"" >> ./Dojofile.to_be_tested
       echo "DOJO_WORK_OUTER=$(pwd)/test/integration/test_dojo_work" >> ./Dojofile.to_be_tested
       time bats "$(pwd)/test/integration/end_user"
-      exit $?
       ;;
   example)
-      docker_ops::ensure_temp_image "${image_dir}" "${imagerc_filename}"
-      echo "Testing image: ${AIT_DOCKER_IMAGE_URL}"
-      echo "DOJO_DOCKER_IMAGE=\"${AIT_DOCKER_IMAGE_URL}\"" > ./Dojofile.example
+      docker_ops::ensure_pulled_image "${image_dir}" "${imagerc_filename}"
+      echo "Testing image: ${KUDU_DOCKER_IMAGE_URL}"
+      echo "DOJO_DOCKER_IMAGE=\"${KUDU_DOCKER_IMAGE_URL}\"" > ./Dojofile.example
       echo "DOJO_IDENTITY_OUTER=\"$(pwd)/test/integration/identities/full\"" >> ./Dojofile.example
       echo "DOJO_WORK_OUTER=$(pwd)/test/integration/test_dojo_work" >> ./Dojofile.example
       dojo -c ./Dojofile.example
@@ -64,13 +64,11 @@ case "${command}" in
       ./tasks verify_version
       version=$(releaser::get_last_version_from_whole_changelog "${changelog_file}")
       git tag "${version}" && git push origin "${version}"
-      exit $?
       ;;
   publish)
       version=$(releaser::get_last_version_from_whole_changelog "${changelog_file}")
-      validate_version_is_semver "${version}"
-      docker_ops::push_production "${image_dir}"  "${imagerc_filename}" "${image_name}" "${version}" "${image_registry}"
-      exit $?
+      docker_ops::ensure_pulled_image "${image_dir}" "${imagerc_filename}"
+      docker_ops::retag_push "${image_dir}"  "${imagerc_filename}" "${image_name}" "${version}" "${image_registry}"
       ;;
   *)
       echo "Invalid command: '${command}'"

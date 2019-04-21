@@ -1,3 +1,12 @@
+### 1.0.0 (2019-Apr-21)
+
+ * removed sudo privileges for dojo user
+ * remove ait registry and archive references
+ * rename to `terraform-dojo`
+ * use new releaser and docker-ops (>= 2.0)
+ * use github as primary git host
+ * dockerhub as main registry, also for the temp image
+
 ### 0.8.0 (2019-Apr-15)
 
  * added AWS plugin
@@ -80,4 +89,4 @@
 
 # 0.1.0 (17 Sep 2015)
 
-Initial release of docker-terraformide
+Initial release of docker-terraform-dojo

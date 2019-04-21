@@ -1,6 +1,6 @@
 resource "openstack_compute_instance_v2" "vm" {
     availability_zone = "nova"
-    name = "terraformide"
+    name = "terraform-dojo"
     image_name = "ubuntu-16.04-bpk-4.13-chef-12.21.1"
     # ephemeral disk is unused anyways
     flavor_name = "v.c1.m1024.d5.e5"

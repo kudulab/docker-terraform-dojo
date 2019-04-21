@@ -1,11 +1,11 @@
+format_version: 3
 pipelines:
-  docker-terraformide:
+  docker-terraform-dojo:
     group: platform
-    label_template: "${COUNT}-${git[:8]}"
+    label_template: "${git[:8]}"
     materials:
       git:
-        git: "git@git.ai-traders.com:platform/docker-terraformide.git"
-        branch: master
+        type: configrepo
         blacklist:
           - "**/*.md"
     stages:
@@ -29,7 +29,7 @@ pipelines:
                   command: /bin/bash
                   arguments:
                     - -c
-                    - ops_docker_push=true ./tasks build
+                    - ./tasks build
       - itest:
           clean_workspace: true
           jobs:
