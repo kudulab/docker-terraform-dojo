@@ -3,7 +3,7 @@
 [Dojo](https://github.com/ai-traders/dojo) docker image with [Terraform](https://terraform.io) and supporting tools installed.
 Based on alpine docker image.
 
-Tested and released images are published to dockerhub as [kudulab/terraform-dojo](https://cloud.docker.com/u/kudulab/repository/docker/kudulab/terraform-dojo)
+Tested and released images are published to dockerhub as [kudulab/terraform-dojo](https://hub.docker.com/r/kudulab/terraform-dojo)
 
 ## Usage
 1. Setup docker.
