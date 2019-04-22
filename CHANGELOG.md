@@ -1,3 +1,7 @@
+### 1.0.1 (2019-Apr-22)
+
+ * added docker login before push
+
 ### 1.0.0 (2019-Apr-21)
 
  * removed sudo privileges for dojo user

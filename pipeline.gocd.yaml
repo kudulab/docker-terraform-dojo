@@ -8,6 +8,8 @@ pipelines:
         type: configrepo
         blacklist:
           - "**/*.md"
+    secure_variables:
+      VAULT_TOKEN: "AES:NCZ6V7tBrCRrVqL2E0dzhQ==:bOAEL5SRVgrDUAcMJ9EX+OGDnw9sZXJDcrT1psHZtwyAgm3dq3XUdronVkt/Nhw+"
     stages:
       - build:
           clean_workspace: true
