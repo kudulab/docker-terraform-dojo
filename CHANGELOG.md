@@ -1,3 +1,9 @@
+### 1.0.2 (2019-Apr-24)
+
+ * change source URL to public terraform
+ * refactor set_version task
+ * added license file
+
 ### 1.0.1 (2019-Apr-22)
 
  * added docker login before push

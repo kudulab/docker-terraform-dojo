@@ -34,15 +34,11 @@ COPY profile /home/dojo/.profile
 RUN chown dojo:dojo /home/dojo/.bashrc /home/dojo/.profile
 
 # install jq to parse json in bash
-RUN export wget_options="--tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force" &&\
-  bash -c "\
-    wget ${wget_options} http://http.archive.ai-traders.com/jq/v1.5/jq-linux64 ||\
-    wget ${wget_options} https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64" &&\
+RUN wget --tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 &&\
   chmod +x ./jq-linux64 &&\
   mv ./jq-linux64 /usr/bin/jq
 
-# download from private endpoint to make it faster than from public endpoint:
-RUN wget http://http.archive.ai-traders.com/chefdev/terraform_${TERRAFORM_VERSION}_linux_amd64.zip &&\
+RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip &&\
   wget -O terraform_${TERRAFORM_VERSION}_SHA256SUMS https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
   cat terraform_${TERRAFORM_VERSION}_SHA256SUMS | grep linux_amd64 > mySHA256SUM.txt &&\
   sha256sum -cs mySHA256SUM.txt &&\

@@ -2,7 +2,7 @@
 
 set -Eeuo pipefail
 
-RELEASER_VERSION="2.0.0"
+RELEASER_VERSION="2.1.0"
 DOCKER_OPS_VERSION="2.0.0"
 SECRET_OPS_VERSION="0.6.1"
 
@@ -44,16 +44,11 @@ command="$1"
 set +u
 case "${command}" in
   set_version)
-      if [[ -n "$2" ]]; then
-        next_version="$2"
-      else
-        version=$(releaser::get_last_version_from_whole_changelog "${changelog_file}")
-        next_version=$(releaser::bump_patch_version "${version}")
-      fi
-      releaser::set_version_in_changelog "${changelog_file}" "${next_version}"
+      set +u
+      releaser::bump_changelog_version "$2" "$3"
       ;;
   verify_version)
-      releaser::verify_changelog_version
+      releaser::verify_release_ready
       ;;
   build)
       docker_login
