@@ -52,7 +52,8 @@ ENV TF_PROVIDER_CONSUL_VERSION="2.1.0" \
   TF_PROVIDER_NULL_VERSION="1.0.0" \
   TF_PROVIDER_EXTERNAL_VERSION="1.0.0" \
   TF_PROVIDER_LOCAL_VERSION="1.1.0" \
-  TF_PROVIDER_TEMPLATE_VERSION="1.0.0"
+  TF_PROVIDER_TEMPLATE_VERSION="1.0.0" \
+  TF_PROVIDER_VAULT_VERSION="1.8.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
@@ -64,6 +65,12 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   unzip terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-aws* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+
+  mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
+  wget https://releases.hashicorp.com/terraform-provider-vault/${TF_PROVIDER_VAULT_VERSION}/terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
+  mv terraform-provider-vault* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-null/${TF_PROVIDER_NULL_VERSION}/terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\

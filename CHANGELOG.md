@@ -1,3 +1,7 @@
+### 1.1.0 (2019-May-19)
+ * added vault
+ * minor fixes in ssh config setup
+ 
 ### 1.0.2 (2019-Apr-24)
 
  * change source URL to public terraform
