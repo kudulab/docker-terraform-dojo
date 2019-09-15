@@ -61,11 +61,14 @@ load '/opt/bats-assert/load.bash'
   assert_equal "$status" 0
 }
 @test "terraform plugins are installed - openstack vm and null_resource" {
-  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"cd openstack_vm && rm -rf ./.terraform && terraform init && terraform get && terraform plan\""
+  # use terraform validate instead of terraform plan, because we no longer
+  # have a connection to openstack
+  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"cd openstack_vm && rm -rf ./.terraform && terraform init && terraform get && terraform validate\""
   # this is printed on test failure
   echo "output: $output"
   refute_output --partial "error"
   refute_output --partial "no suitable version installed"
+  assert_output --partial "Success"
   assert_equal "$status" 0
 }
 @test "jq is installed" {
