@@ -36,6 +36,7 @@ Those files are used inside the docker image:
 
 1. `~/.ssh/` -- is copied from host to dojo's home `~/.ssh`
 1. `~/.ssh/config` -- will be generated on docker container start. SSH client is configured to ignore known ssh hosts.
+1. `~/.aws/` -- is copied from host to dojo's home `~/.aws`
 2. `~/.gitconfig` -- if exists locally, will be copied
 3. `~/.profile` -- will be generated on docker container start, in
    order to ensure current directory is `/dojo/work`.

@@ -30,3 +30,8 @@ if [ -f "${dojo_identity}/.vault-token" ]; then
   cp "${dojo_identity}/.vault-token" "${dojo_home}"
   chown dojo:dojo  ${dojo_home}/.vault-token
 fi
+
+if [[ -d ${dojo_identity}/.aws ]]; then
+    cp -pr ${dojo_identity}/.aws ${dojo_home}/.aws
+    chown dojo:dojo -R ${dojo_home}/.aws
+fi

@@ -1,3 +1,7 @@
+### 1.2.1 (2019-Sep-15)
+
+ * copy the directory `~/.aws` from docker host to dojo's home
+
 ### 1.2.0 (2019-Sep-15)
 
  * use newer base image alpine:3.10

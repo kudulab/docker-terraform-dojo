@@ -78,3 +78,10 @@ load '/opt/bats-assert/load.bash'
   assert_output --partial "jq is a tool for processing JSON"
   assert_equal "$status" 2
 }
+@test "aws config directory is copied from identity directory" {
+  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"cat /home/dojo/.aws/config\""
+  # this is printed on test failure
+  echo "output: $output"
+  assert_output --partial "region"
+  assert_equal "$status" 0
+}
