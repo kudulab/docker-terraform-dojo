@@ -11,12 +11,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
   rm -r /tmp/dojo_git
 ############
 
-COPY etc_dojo.d/scripts/* /etc/dojo.d/scripts/
-COPY inputrc /etc/inputrc
-
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-CMD ["/bin/bash"]
-
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
 ENV TERRAFORM_VERSION=0.12.8
 ENV TERRAFORM_SHA256SUM=43806e68f7af396449dd4577c6e5cb63c6dc4a253ae233e1dddc46cf423d808b
@@ -100,3 +94,9 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   chown dojo:dojo -R /home/dojo/.terraform.d/
 COPY terraformrc /home/dojo/.terraformrc
 RUN chown dojo:dojo /home/dojo/.terraformrc
+
+COPY etc_dojo.d/scripts/* /etc/dojo.d/scripts/
+COPY inputrc /etc/inputrc
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+CMD ["/bin/bash"]
