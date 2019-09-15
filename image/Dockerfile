@@ -18,8 +18,8 @@ ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["/bin/bash"]
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=0.11.10
-ENV TERRAFORM_SHA256SUM=43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527
+ENV TERRAFORM_VERSION=0.12.8
+ENV TERRAFORM_SHA256SUM=43806e68f7af396449dd4577c6e5cb63c6dc4a253ae233e1dddc46cf423d808b
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -46,14 +46,14 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
   rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
-ENV TF_PROVIDER_CONSUL_VERSION="2.1.0" \
-  TF_PROVIDER_OPENSTACK_VERSION="1.11.0" \
-  TF_PROVIDER_AWS_VERSION="2.6.0" \
-  TF_PROVIDER_NULL_VERSION="1.0.0" \
-  TF_PROVIDER_EXTERNAL_VERSION="1.0.0" \
-  TF_PROVIDER_LOCAL_VERSION="1.1.0" \
-  TF_PROVIDER_TEMPLATE_VERSION="1.0.0" \
-  TF_PROVIDER_VAULT_VERSION="1.8.0"
+ENV TF_PROVIDER_CONSUL_VERSION="2.5.0" \
+  TF_PROVIDER_OPENSTACK_VERSION="1.22.0" \
+  TF_PROVIDER_AWS_VERSION="2.28.1" \
+  TF_PROVIDER_NULL_VERSION="2.1.2" \
+  TF_PROVIDER_EXTERNAL_VERSION="1.2.0" \
+  TF_PROVIDER_LOCAL_VERSION="1.3.0" \
+  TF_PROVIDER_TEMPLATE_VERSION="2.1.2" \
+  TF_PROVIDER_VAULT_VERSION="2.3.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\

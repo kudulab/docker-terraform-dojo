@@ -1,4 +1,13 @@
  * use newer base image alpine:3.10
+ * terraform 0.12.8
+ * terraform-provider-consul 2.5.0
+ * terraform-provider-openstack 1.220
+ * terraform-provider-aws 2.28.1
+ * terraform-provider-null 2.1.2 1.2.0
+ * terraform-provider-external 1.2.0
+ * terraform-provider-local 1.3.0
+ * terraform-provider-template 2.1.2
+ * terraform-provider-vault 2.3.0
 
 ### 1.1.0 (2019-May-19)
  * added vault
