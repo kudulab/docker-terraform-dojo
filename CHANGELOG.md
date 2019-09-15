@@ -1,3 +1,5 @@
+### 1.2.0 (2019-Sep-15)
+
  * use newer base image alpine:3.10
  * terraform 0.12.8
  * terraform-provider-consul 2.5.0

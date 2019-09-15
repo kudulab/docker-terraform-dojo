@@ -9,7 +9,7 @@ pipelines:
         blacklist:
           - "**/*.md"
     secure_variables:
-      VAULT_TOKEN: "AES:CtseKn4LvXkNn/chn/9K3Q==:12VBXiIa+A7bikKduu4k5UuWjt1jvu9wCdzFHLlL5+0="
+      VAULT_TOKEN: "AES:DbaRyZmFNObeqJol8KxWUA==:Vgje3YGLqKdR7IXeV33quwDMuoGKW0MOwq+KZGTIw3A="
     stages:
       - build:
           clean_workspace: true
