@@ -4,7 +4,7 @@ set -Eeuo pipefail
 
 RELEASER_VERSION="2.1.0"
 DOCKER_OPS_VERSION="2.0.0"
-SECRET_OPS_VERSION="0.6.1"
+SECRET_OPS_VERSION="0.8.0"
 
 SECRET_OPS_FILE="ops/secret-ops"
 SECRET_OPS_TAR_FILE="ops/secret-ops-${SECRET_OPS_VERSION}.tar.gz"
@@ -52,11 +52,13 @@ case "${command}" in
   verify_version)
       releaser::verify_release_ready
       ;;
+  build_local)
+      image_tag=$(git rev-parse HEAD)
+      docker_ops::docker_build "${image_dir}" "${imagerc_filename}" "${image_name}" "${image_tag}" "${image_registry}"
+      ;;
   build)
       docker_login
-      image_tag=$(git rev-parse HEAD)
-      # build image and push to a test registry
-      docker_ops::docker_build "${image_dir}" "${imagerc_filename}" "${image_name}" "${image_tag}" "${image_registry}"
+      ./tasks build_local
       docker_ops::push "${image_dir}" "${imagerc_filename}"
       ;;
   itest)
