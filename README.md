@@ -1,16 +1,16 @@
 # docker-terraform-dojo
 
-[Dojo](https://github.com/ai-traders/dojo) docker image with [Terraform](https://terraform.io) and supporting tools installed.
+[Dojo](https://github.com/kudulab/dojo) docker image with [Terraform](https://terraform.io) and supporting tools installed.
 Based on alpine docker image.
 
 Tested and released images are published to dockerhub as [kudulab/terraform-dojo](https://hub.docker.com/r/kudulab/terraform-dojo)
 
 ## Usage
 1. Setup docker.
-2. Install [Dojo](https://github.com/ai-traders/dojo) binary.
+2. Install [Dojo](https://github.com/kudulab/dojo) binary.
 3. Provide a Dojofile:
 ```
-DOJO_DOCKER_IMAGE="kudulab/terraform-dojo:1.0.0"
+DOJO_DOCKER_IMAGE="kudulab/terraform-dojo:latest"
 ```
 4. Create and enter the container by running `dojo` at the root of project.
 5. Work with terraform as usual:
@@ -26,7 +26,7 @@ By default, current directory in docker container is `/dojo/work`.
 
  * base image is alpine, to make this image as small as possible
  * terraform binary on the PATH
- * terraform plugins: consul, openstack, aws, null, external, local, template.
+ * terraform plugins: consul, openstack, aws, null, external, local, template, vault.
  * `jq` to parse JSON from bash scripts
  * `dot` to generate infrastructure graphs from terraform
  * a minimal ssh and git setup - to clone terraform modules
