@@ -60,6 +60,13 @@ load '/opt/bats-assert/load.bash'
   assert_output --partial "git version"
   assert_equal "$status" 0
 }
+@test "make is installed" {
+  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"make --version\""
+  # this is printed on test failure
+  echo "output: $output"
+  assert_output --partial "GNU Make"
+  assert_equal "$status" 0
+}
 @test "terraform plugins are installed - openstack vm and null_resource" {
   # use terraform validate instead of terraform plan, because we no longer
   # have a connection to openstack
