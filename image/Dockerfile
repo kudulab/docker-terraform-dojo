@@ -47,6 +47,7 @@ ENV TF_PROVIDER_CONSUL_VERSION="2.5.0" \
   TF_PROVIDER_EXTERNAL_VERSION="1.2.0" \
   TF_PROVIDER_LOCAL_VERSION="1.3.0" \
   TF_PROVIDER_TEMPLATE_VERSION="2.1.2" \
+  TF_PROVIDER_TIME_VERSION="0.5.0" \
   TF_PROVIDER_VAULT_VERSION="2.3.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
@@ -90,6 +91,11 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   unzip terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-template* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+
+  wget https://releases.hashicorp.com/terraform-provider-time/${TF_PROVIDER_TIME_VERSION}/terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
+  mv terraform-provider-time_* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
 
   chown dojo:dojo -R /home/dojo/.terraform.d/
 COPY terraformrc /home/dojo/.terraformrc
