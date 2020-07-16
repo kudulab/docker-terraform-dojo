@@ -3,7 +3,7 @@ FROM alpine:3.10
 ############
 # For Dojo:
 # * entrypoint requires sudo and shadow
-# * git is needed to install ide image configs
+# * git is needed to install dojo image configs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git && \
   git clone --depth 1 -b 0.6.0 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
@@ -12,8 +12,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 ############
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=0.12.8
-ENV TERRAFORM_SHA256SUM=43806e68f7af396449dd4577c6e5cb63c6dc4a253ae233e1dddc46cf423d808b
+ENV TERRAFORM_VERSION=0.12.28
+ENV TERRAFORM_SHA256SUM=be99da1439a60942b8d23f63eba1ea05ff42160744116e84f46fc24f1a8011b6
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -47,6 +47,7 @@ ENV TF_PROVIDER_CONSUL_VERSION="2.5.0" \
   TF_PROVIDER_EXTERNAL_VERSION="1.2.0" \
   TF_PROVIDER_LOCAL_VERSION="1.3.0" \
   TF_PROVIDER_TEMPLATE_VERSION="2.1.2" \
+  TF_PROVIDER_TIME_VERSION="0.5.0" \
   TF_PROVIDER_VAULT_VERSION="2.3.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
@@ -90,6 +91,11 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   unzip terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-template* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+
+  wget https://releases.hashicorp.com/terraform-provider-time/${TF_PROVIDER_TIME_VERSION}/terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
+  mv terraform-provider-time_* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
 
   chown dojo:dojo -R /home/dojo/.terraform.d/
 COPY terraformrc /home/dojo/.terraformrc
