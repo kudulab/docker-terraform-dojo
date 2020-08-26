@@ -6,7 +6,7 @@ FROM alpine:3.10
 # * git is needed to install dojo image configs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git && \
-  git clone --depth 1 -b 0.6.0 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
+  git clone --depth 1 -b 0.9.0 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
   /tmp/dojo_git/image_scripts/src/install.sh && \
   rm -r /tmp/dojo_git
 ############
@@ -31,6 +31,11 @@ RUN chown dojo:dojo /home/dojo/.bashrc /home/dojo/.profile
 RUN wget --tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 &&\
   chmod +x ./jq-linux64 &&\
   mv ./jq-linux64 /usr/bin/jq
+
+# install assume-role which is a handy tool
+RUN wget --tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force https://github.com/remind101/assume-role/releases/download/0.3.2/assume-role-Linux &&\
+  chmod +x ./assume-role-Linux &&\
+  mv ./assume-role-Linux /usr/bin/assume-role
 
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip &&\
   wget -O terraform_${TERRAFORM_VERSION}_SHA256SUMS https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS &&\
