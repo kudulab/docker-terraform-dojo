@@ -1,3 +1,7 @@
+### 1.4.0 (2020-Aug-26)
+ * upgraded terraform to 0.12.28
+ * added assume-role helper tool
+
 ### 1.3.0 (2019-Sep-27)
 Added make
 
