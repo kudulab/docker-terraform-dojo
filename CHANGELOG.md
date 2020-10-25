@@ -1,3 +1,7 @@
+### 1.4.1 (2020-Oct-25)
+
+* use dojo 0.10.2 docker image scripts, to make it work on Mac using FUSE docker volume driver
+
 ### 1.4.0 (2020-Aug-26)
  * upgraded terraform to 0.12.28
  * added assume-role helper tool
