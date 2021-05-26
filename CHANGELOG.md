@@ -1,3 +1,19 @@
+### 1.5.0 (2021-May-26)
+
+* use newer base image alpine:3.13
+* dojo 0.10.3
+* terraform 0.15.4
+* terraform-provider-consul 2.12.0
+* terraform-provider-openstack 1.42.0
+* terraform-provider-aws 3.42.0
+* terraform-provider-null 3.1.0
+* terraform-provider-external 2.1.0
+* terraform-provider-local 2.1.0
+* terraform-provider-google 3.69.0 (**added**)
+* terraform-provider-template 2.2.0
+* terraform-provider-time 0.7.1
+* terraform-provider-vault 2.20.0
+
 ### 1.4.1 (2020-Oct-25)
 
 * use dojo 0.10.2 docker image scripts, to make it work on Mac using FUSE docker volume driver

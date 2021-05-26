@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.13
 
 ############
 # For Dojo:
@@ -6,14 +6,13 @@ FROM alpine:3.10
 # * git is needed to install dojo image configs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git && \
-  git clone --depth 1 -b 0.10.2 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
+  git clone --depth 1 -b 0.10.3 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
   /tmp/dojo_git/image_scripts/src/install.sh && \
   rm -r /tmp/dojo_git
 ############
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=0.12.28
-ENV TERRAFORM_SHA256SUM=be99da1439a60942b8d23f63eba1ea05ff42160744116e84f46fc24f1a8011b6
+ENV TERRAFORM_VERSION=0.15.4
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -45,15 +44,16 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
   rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
-ENV TF_PROVIDER_CONSUL_VERSION="2.5.0" \
-  TF_PROVIDER_OPENSTACK_VERSION="1.22.0" \
-  TF_PROVIDER_AWS_VERSION="2.70.0" \
-  TF_PROVIDER_NULL_VERSION="2.1.2" \
-  TF_PROVIDER_EXTERNAL_VERSION="1.2.0" \
-  TF_PROVIDER_LOCAL_VERSION="1.3.0" \
-  TF_PROVIDER_TEMPLATE_VERSION="2.1.2" \
-  TF_PROVIDER_TIME_VERSION="0.5.0" \
-  TF_PROVIDER_VAULT_VERSION="2.3.0"
+ENV TF_PROVIDER_CONSUL_VERSION="2.12.0" \
+  TF_PROVIDER_OPENSTACK_VERSION="1.42.0" \
+  TF_PROVIDER_AWS_VERSION="3.42.0" \
+  TF_PROVIDER_GOOGLE_VERSION="3.69.0" \
+  TF_PROVIDER_NULL_VERSION="3.1.0" \
+  TF_PROVIDER_EXTERNAL_VERSION="2.1.0" \
+  TF_PROVIDER_LOCAL_VERSION="2.1.0" \
+  TF_PROVIDER_TEMPLATE_VERSION="2.2.0" \
+  TF_PROVIDER_TIME_VERSION="0.7.1" \
+  TF_PROVIDER_VAULT_VERSION="2.20.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
@@ -65,6 +65,11 @@ RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   unzip terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
   mv terraform-provider-aws* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+
+  wget https://releases.hashicorp.com/terraform-provider-google/${TF_PROVIDER_GOOGLE_VERSION}/terraform-provider-google_${TF_PROVIDER_GOOGLE_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-google_${TF_PROVIDER_GOOGLE_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-google_${TF_PROVIDER_GOOGLE_VERSION}_linux_amd64.zip &&\
+  mv terraform-provider-google_* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
 
   mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-vault/${TF_PROVIDER_VAULT_VERSION}/terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
