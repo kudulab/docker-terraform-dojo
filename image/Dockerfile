@@ -54,58 +54,67 @@ ENV TF_PROVIDER_CONSUL_VERSION="2.12.0" \
   TF_PROVIDER_TEMPLATE_VERSION="2.2.0" \
   TF_PROVIDER_TIME_VERSION="0.7.1" \
   TF_PROVIDER_VAULT_VERSION="2.20.0"
-RUN mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
-  wget https://releases.hashicorp.com/terraform-provider-openstack/${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
+RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
+
+  wget https://releases.hashicorp.com/terraform-provider-openstack/$TF_PROVIDER_OPENSTACK_VERSION/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-openstack* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/terraform-provider-openstack/openstack/${TF_PROVIDER_OPENSTACK_VERSION}/linux_amd64 && \
+  mv terraform-provider-openstack* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/terraform-provider-openstack/openstack/${TF_PROVIDER_OPENSTACK_VERSION}/linux_amd64 &&\
 
-  mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
-  wget https://releases.hashicorp.com/terraform-provider-aws/${TF_PROVIDER_AWS_VERSION}/terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
-  unzip terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
-  rm terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-aws* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  wget https://releases.hashicorp.com/terraform-provider-aws/3.42.0/terraform-provider-aws_3.42.0_linux_amd64.zip &&\
+  unzip terraform-provider-aws_3.42.0_linux_amd64.zip &&\
+  rm terraform-provider-aws_3.42.0_linux_amd64.zip &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/aws/${TF_PROVIDER_AWS_VERSION}/linux_amd64 && \
+  mv terraform-provider-aws* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/aws/${TF_PROVIDER_AWS_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-google/${TF_PROVIDER_GOOGLE_VERSION}/terraform-provider-google_${TF_PROVIDER_GOOGLE_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-google_${TF_PROVIDER_GOOGLE_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-google_${TF_PROVIDER_GOOGLE_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-google_* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/google/${TF_PROVIDER_GOOGLE_VERSION}/linux_amd64 && \
+  mv terraform-provider-google_* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/google/${TF_PROVIDER_GOOGLE_VERSION}/linux_amd64 &&\
 
-  mkdir -p /home/dojo/.terraform.d/plugins/linux_amd64 && cd /tmp &&\
   wget https://releases.hashicorp.com/terraform-provider-vault/${TF_PROVIDER_VAULT_VERSION}/terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-vault_${TF_PROVIDER_VAULT_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-vault* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/vault/${TF_PROVIDER_VAULT_VERSION}/linux_amd64 && \
+  mv terraform-provider-vault* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/vault/${TF_PROVIDER_VAULT_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-null/${TF_PROVIDER_NULL_VERSION}/terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-null_${TF_PROVIDER_NULL_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-null* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/null/${TF_PROVIDER_NULL_VERSION}/linux_amd64 && \
+  mv terraform-provider-null* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/null/${TF_PROVIDER_NULL_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-consul/${TF_PROVIDER_CONSUL_VERSION}/terraform-provider-consul_${TF_PROVIDER_CONSUL_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-consul_${TF_PROVIDER_CONSUL_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-consul_${TF_PROVIDER_CONSUL_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-consul* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/consul/${TF_PROVIDER_CONSUL_VERSION}/linux_amd64 && \
+  mv terraform-provider-consul* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/consul/${TF_PROVIDER_CONSUL_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-external/${TF_PROVIDER_EXTERNAL_VERSION}/terraform-provider-external_${TF_PROVIDER_EXTERNAL_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-external_${TF_PROVIDER_EXTERNAL_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-external_${TF_PROVIDER_EXTERNAL_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-external* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/external/${TF_PROVIDER_EXTERNAL_VERSION}/linux_amd64 && \
+  mv terraform-provider-external* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/external/${TF_PROVIDER_EXTERNAL_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-local/${TF_PROVIDER_LOCAL_VERSION}/terraform-provider-local_${TF_PROVIDER_LOCAL_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-local_${TF_PROVIDER_LOCAL_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-local_${TF_PROVIDER_LOCAL_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-local* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/local/${TF_PROVIDER_LOCAL_VERSION}/linux_amd64 && \
+  mv terraform-provider-local* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/local/${TF_PROVIDER_LOCAL_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-template/${TF_PROVIDER_TEMPLATE_VERSION}/terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-template_${TF_PROVIDER_TEMPLATE_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-template* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/template/${TF_PROVIDER_TEMPLATE_VERSION}/linux_amd64 && \
+  mv terraform-provider-template* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/template/${TF_PROVIDER_TEMPLATE_VERSION}/linux_amd64 &&\
 
   wget https://releases.hashicorp.com/terraform-provider-time/${TF_PROVIDER_TIME_VERSION}/terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
   unzip terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-time_${TF_PROVIDER_TIME_VERSION}_linux_amd64.zip &&\
-  mv terraform-provider-time_* /home/dojo/.terraform.d/plugins/linux_amd64 &&\
+  mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/time/${TF_PROVIDER_TIME_VERSION}/linux_amd64 && \
+  mv terraform-provider-time_* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/time/${TF_PROVIDER_TIME_VERSION}/linux_amd64 &&\
 
   chown dojo:dojo -R /home/dojo/.terraform.d/
 COPY terraformrc /home/dojo/.terraformrc

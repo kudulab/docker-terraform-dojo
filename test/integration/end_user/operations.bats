@@ -16,11 +16,11 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "dojo -c Dojofile.to_be_tested \"terraform --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "Terraform v0.12.28"
+  assert_line --partial "Terraform v0.15.4"
   assert_equal "$status" 0
 }
 @test "openstack env variables are preserved" {
-  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"env | grep OS_ | grep -v OS_PASSWORD\""
+  run /bin/bash -c "OS_USERNAME=abc dojo -c Dojofile.to_be_tested \"env | grep OS_ | grep -v OS_PASSWORD\""
   # this is printed on test failure
   echo "output: $output"
   assert_line --partial "OS_USERNAME"
@@ -67,13 +67,19 @@ load '/opt/bats-assert/load.bash'
   assert_output --partial "GNU Make"
   assert_equal "$status" 0
 }
-@test "terraform plugins are installed - openstack vm and null_resource" {
+@test "selected terraform plugins are installed" {
   # use terraform validate instead of terraform plan, because we no longer
   # have a connection to openstack
-  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"cd openstack_vm && rm -rf ./.terraform && terraform init && terraform get && terraform validate\""
+  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"\
+    cd aws_ec2 \
+    && rm -rf ./.terraform* \
+    && terraform init \
+    && terraform get \
+    && terraform validate\""
   # this is printed on test failure
   echo "output: $output"
-  refute_output --partial "error"
+  refute_output --regexp "[Ee]rror"
+  refute_output --regexp "[Ii]nstalling"
   refute_output --partial "no suitable version installed"
   assert_output --partial "Success"
   assert_equal "$status" 0
