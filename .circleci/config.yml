@@ -7,16 +7,20 @@ workflows:
   docker-terraform-dojo:
     jobs:
       - build
+      - verify_version
       - itest:
           requires:
             - build
       - release:
           requires:
             - itest
-      # TODO reinstate once pipeline is safe
-      # - publish:
-      #     requires:
-      #       - release
+            - verify_version
+          filters:
+            branches:
+              only: master
+      - publish:
+          requires:
+            - release
 
 jobs:
   build:
@@ -31,6 +35,13 @@ jobs:
           root: ~/repo
           paths:
             - image/imagerc
+
+  verify_version:
+    executor: platform
+    steps:
+      - setup
+      - run:
+          command: /bin/bash -c "./tasks verify_version"
 
   itest:
     executor: platform
