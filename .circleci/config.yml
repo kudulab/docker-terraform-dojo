@@ -7,9 +7,15 @@ workflows:
   docker-terraform-dojo:
     jobs:
       - build
-      - itest
-      - release
-      - publish
+      - itest:
+          requires:
+            - build
+      - release:
+          requires:
+            - itest
+      - publish:
+          requires:
+            - release
 
 jobs:
   build:
@@ -21,7 +27,7 @@ jobs:
       - run:
           command: /bin/bash -c "./tasks build"
       - persist_to_workspace:
-          root: ~/
+          root: ~/repo
           paths:
             - image/imagerc
 
@@ -30,7 +36,7 @@ jobs:
     steps:
       - setup
       - attach_workspace:
-          at: ~/
+          at: ~/repo
       - run:
           command: /bin/bash -c "./tasks itest"
 
@@ -46,7 +52,7 @@ jobs:
     steps:
       - setup
       - attach_workspace:
-          at: ~/
+          at: ~/repo
       - run:
           command: /bin/bash -c "./tasks publish"
 
@@ -59,4 +65,4 @@ executors:
   platform:
     machine:
       image: ubuntu-2004:202101-01
-    working_directory: ~/
+    working_directory: ~/repo
