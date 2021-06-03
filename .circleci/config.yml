@@ -1,0 +1,53 @@
+version: 2.1
+
+workflows:
+  # Environment variables required in CircleCI environment:
+  #  - DOCKERHUB_USERNAME
+  #  - DOCKERHUB_TOKEN
+  docker-terraform-dojo:
+    jobs:
+      - build
+      - itest
+      - release
+      - publish
+
+jobs:
+  build:
+    executor: platform
+    steps:
+      - run:
+          command: /bin/bash -c "./tasks verify_version"
+      - run:
+          command: /bin/bash -c "./tasks build"
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - image/imagerc
+
+  itest:
+    executor: platform
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: /bin/bash -c "./tasks itest"
+
+  release:
+    executor: platform
+    steps:
+      - run:
+          command: /bin/bash -c "./tasks release"
+
+  publish:
+    executor: platform
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: /bin/bash -c "./tasks publish"
+
+executors:
+  platform:
+    machine:
+      image: ubuntu-2004:202101-01
+    working_directory: ~/
