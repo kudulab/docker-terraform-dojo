@@ -13,9 +13,10 @@ workflows:
       - release:
           requires:
             - itest
-      - publish:
-          requires:
-            - release
+      # TODO reinstate once pipeline is safe
+      # - publish:
+      #     requires:
+      #       - release
 
 jobs:
   build:
@@ -35,6 +36,12 @@ jobs:
     executor: platform
     steps:
       - setup
+      - run:
+          command: sudo git clone https://github.com/bats-core/bats-core /opt/bats-core
+      - run:
+          command: sudo git clone https://github.com/bats-core/bats-assert /opt/bats-assert
+      - run:
+          command: sudo git clone https://github.com/bats-core/bats-support /opt/bats-support
       - attach_workspace:
           at: ~/repo
       - run:
