@@ -15,6 +15,7 @@ jobs:
   build:
     executor: platform
     steps:
+      - setup
       - run:
           command: /bin/bash -c "./tasks verify_version"
       - run:
@@ -27,6 +28,7 @@ jobs:
   itest:
     executor: platform
     steps:
+      - setup
       - attach_workspace:
           at: ~/
       - run:
@@ -35,16 +37,23 @@ jobs:
   release:
     executor: platform
     steps:
+      - setup
       - run:
           command: /bin/bash -c "./tasks release"
 
   publish:
     executor: platform
     steps:
+      - setup
       - attach_workspace:
           at: ~/
       - run:
           command: /bin/bash -c "./tasks publish"
+
+commands:
+  setup:
+    steps:
+      - checkout
 
 executors:
   platform:
