@@ -1,3 +1,7 @@
+### 1.5.1 (2021-Aug-16)
+
+* terraform [1.0.4](https://github.com/hashicorp/terraform/blob/v1.0.4/CHANGELOG.md)
+
 ### 1.5.0 (2021-May-26)
 
 * use newer base image alpine:3.13
