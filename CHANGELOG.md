@@ -1,3 +1,7 @@
+### 1.6.0 (2021-Dec-05)
+
+* Install AWS CLI version 2
+
 ### 1.5.1 (2021-Aug-16)
 
 * terraform [1.0.4](https://github.com/hashicorp/terraform/blob/v1.0.4/CHANGELOG.md)
