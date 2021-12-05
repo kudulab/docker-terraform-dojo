@@ -117,6 +117,31 @@ RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
   mv terraform-provider-time_* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/time/${TF_PROVIDER_TIME_VERSION}/linux_amd64 &&\
 
   chown dojo:dojo -R /home/dojo/.terraform.d/
+
+# Install AWS CLI version 2 (validate the files using the PGP signature)
+# https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html
+# It does not work by default on Alpine Linux, thus we need glibc to fix it:
+# https://github.com/aws/aws-cli/issues/4685#issuecomment-615872019
+# AWC CLI version 2 changelog: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst
+RUN apk add --no-cache unzip gnupg nano
+COPY aws.gpg /opt/aws.gpg
+ENV GLIBC_VER=2.31-r0 AWS_CLI_VERSION=2.4.5
+RUN apk --no-cache add \
+        binutils \
+        curl \
+    && curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
+    && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-${GLIBC_VER}.apk \
+    && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-bin-${GLIBC_VER}.apk \
+    && apk add --no-cache \
+        glibc-${GLIBC_VER}.apk \
+        glibc-bin-${GLIBC_VER}.apk &&\
+  curl -o awscliv2.sig https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_CLI_VERSION}.zip.sig &&\
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_CLI_VERSION}.zip" -o "awscliv2.zip" &&\
+  gpg --import /opt/aws.gpg &&\
+  gpg --verify awscliv2.sig awscliv2.zip &&\
+  unzip awscliv2.zip &&\
+  ./aws/install
+
 COPY terraformrc /home/dojo/.terraformrc
 RUN chown dojo:dojo /home/dojo/.terraformrc
 

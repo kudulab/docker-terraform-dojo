@@ -98,3 +98,10 @@ load '/opt/bats-assert/load.bash'
   assert_output --partial "region"
   assert_equal "$status" 0
 }
+@test "correct AWS CLI version is installed" {
+  run /bin/bash -c "dojo -c Dojofile.to_be_tested \"aws --version\""
+  # this is printed on test failure
+  echo "output: $output"
+  assert_line --partial "aws-cli/2.4.5"
+  assert_equal "$status" 0
+}
