@@ -6,13 +6,13 @@ FROM alpine:3.13
 # * git is needed to install dojo image configs
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git && \
-  git clone --depth 1 -b 0.10.3 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
+  git clone --depth 1 -b 0.11.0 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
   /tmp/dojo_git/image_scripts/src/install.sh && \
   rm -r /tmp/dojo_git
 ############
 
 # Same as at: https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/
-ENV TERRAFORM_VERSION=1.0.4
+ENV TERRAFORM_VERSION=1.0.10
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -46,9 +46,9 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 # install plugins
 ENV TF_PROVIDER_CONSUL_VERSION="2.12.0" \
   TF_PROVIDER_OPENSTACK_VERSION="1.42.0" \
-  TF_PROVIDER_AWS_VERSION="3.42.0" \
+  TF_PROVIDER_AWS_VERSION="3.75.1" \
   TF_PROVIDER_GOOGLE_VERSION="3.69.0" \
-  TF_PROVIDER_NULL_VERSION="3.1.0" \
+  TF_PROVIDER_NULL_VERSION="3.1.1" \
   TF_PROVIDER_EXTERNAL_VERSION="2.1.0" \
   TF_PROVIDER_LOCAL_VERSION="2.1.0" \
   TF_PROVIDER_TEMPLATE_VERSION="2.2.0" \

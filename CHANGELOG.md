@@ -1,3 +1,10 @@
+### 1.6.1 (2022-Apr-25)
+
+* terraform 1.0.10
+* terraform-provider-aws 3.75.1
+* terraform-provider-null 3.1.1
+* dojo scripts from 0.11.0
+
 ### 1.6.0 (2021-Dec-05)
 
 * Install AWS CLI version 2

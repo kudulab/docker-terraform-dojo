@@ -4,10 +4,10 @@ terraform {
 
   required_providers {
     aws = {
-      version = "~> 3.42.0"
+      version = "~> 3.75.1"
     }
     null = {
-      version = "~> 3.1.0"
+      version = "~> 3.1.1"
     }
     # Simply for the sake of verification
     openstack = {
