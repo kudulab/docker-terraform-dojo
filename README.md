@@ -62,24 +62,21 @@ So that packer-dojo and terraform-dojo are similar and thus easier to maintain.
 
 Full spec is [ops-base](https://github.com/kudulab/ops-base)
 
-### Lifecycle
-1. In a feature branch:
- * you make changes
- * and run tests:
-     * `./tasks build`
-     * `./tasks itest`
-1. You decide that your changes are ready and you:
- * merge into master branch
- * run locally:
-   * `./tasks set_version` to set version in CHANGELOG, bump patch version
-   * e.g. `./tasks set_version 1.2.3` to set version in CHANGELOG to 1.2.3
- * push to master onto private git server
-1. CI server (GoCD) tests and releases.
 
+## Contributing
+Instructions how to update this project.
+
+1. Create a new feature branch from the main branch
+1. Work on your changes in that feature branch. If you want, describe you changes in [CHANGELOG.md](CHANGELOG.md)
+1. Build your image locally to check that it succeeds: `./tasks build_local`
+1. Test your image locally: `./tasks itest`. You may need to install the test framework - you can do it with `sudo ./tasks install_bats`
+1. If you are happy with the results, create a PR from your feature branch to master branch
+
+After this, someone will read your PR, merge it and ensure version bump (using `./tasks set_version`). CI pipeline will run to automatically build and test docker image, release the project and publish the docker image.
 
 ## License
 
-Copyright 2019 Ewa Czechowska, Tomasz Sętkowski
+Copyright 2019-2022 Ewa Czechowska, Tomasz Sętkowski
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
