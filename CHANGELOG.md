@@ -1,3 +1,7 @@
+### 1.6.2 (2022-Jun-22)
+
+* #8 provide a task to install bats-core for local development
+
 ### 1.6.1 (2022-Apr-25)
 
 * terraform 1.0.10
