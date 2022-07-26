@@ -16,7 +16,7 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "dojo -c Dojofile.to_be_tested \"terraform --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "Terraform v1.0.10"
+  assert_line --partial "Terraform v1.2.3"
   assert_equal "$status" 0
 }
 @test "openstack env variables are preserved" {
@@ -67,7 +67,7 @@ load '/opt/bats-assert/load.bash'
   assert_output --partial "GNU Make"
   assert_equal "$status" 0
 }
-@test "selected terraform plugins are installed" {
+@test "selected terraform plugins are installed for AWS" {
   # use terraform validate instead of terraform plan, because we no longer
   # have a connection to openstack
   run /bin/bash -c "dojo -c Dojofile.to_be_tested \"\

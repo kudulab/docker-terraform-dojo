@@ -1,6 +1,7 @@
 ### 1.7.0 (2022-Jul-26)
 
 * split the task build into build and push
+* terraform 1.2.3
 
 ### 1.6.2 (2022-Jun-22)
 
