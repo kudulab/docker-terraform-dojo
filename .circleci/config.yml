@@ -31,6 +31,8 @@ jobs:
           command: /bin/bash -c "./tasks verify_version"
       - run:
           command: /bin/bash -c "./tasks build"
+      - run:
+          command: /bin/bash -c "./tasks push"
       - persist_to_workspace:
           root: ~/repo
           paths:

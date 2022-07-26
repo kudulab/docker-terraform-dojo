@@ -1,3 +1,7 @@
+### 1.7.0 (2022-Jul-26)
+
+* split the task build into build and push
+
 ### 1.6.2 (2022-Jun-22)
 
 * #8 provide a task to install bats-core for local development
