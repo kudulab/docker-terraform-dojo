@@ -2,6 +2,7 @@
 
 * split the task build into build and push
 * terraform 1.2.3
+* alpine 3.16
 
 ### 1.6.2 (2022-Jun-22)
 
