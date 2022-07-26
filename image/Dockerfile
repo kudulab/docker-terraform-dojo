@@ -45,7 +45,7 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 # install plugins
 ENV TF_PROVIDER_CONSUL_VERSION="2.12.0" \
   TF_PROVIDER_OPENSTACK_VERSION="1.42.0" \
-  TF_PROVIDER_AWS_VERSION="3.75.1" \
+  TF_PROVIDER_AWS_VERSION="3.75.2" \
   TF_PROVIDER_GOOGLE_VERSION="3.69.0" \
   TF_PROVIDER_NULL_VERSION="3.1.1" \
   TF_PROVIDER_EXTERNAL_VERSION="2.1.0" \
@@ -61,9 +61,9 @@ RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
   mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/terraform-provider-openstack/openstack/${TF_PROVIDER_OPENSTACK_VERSION}/linux_amd64 && \
   mv terraform-provider-openstack* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/terraform-provider-openstack/openstack/${TF_PROVIDER_OPENSTACK_VERSION}/linux_amd64 &&\
 
-  wget https://releases.hashicorp.com/terraform-provider-aws/3.42.0/terraform-provider-aws_3.42.0_linux_amd64.zip &&\
-  unzip terraform-provider-aws_3.42.0_linux_amd64.zip &&\
-  rm terraform-provider-aws_3.42.0_linux_amd64.zip &&\
+  wget https://releases.hashicorp.com/terraform-provider-aws/${TF_PROVIDER_AWS_VERSION}/terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
+  unzip terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
+  rm terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip &&\
   mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/aws/${TF_PROVIDER_AWS_VERSION}/linux_amd64 && \
   mv terraform-provider-aws* /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/hashicorp/aws/${TF_PROVIDER_AWS_VERSION}/linux_amd64 &&\
 
@@ -140,6 +140,7 @@ RUN apk --no-cache add \
   gpg --verify awscliv2.sig awscliv2.zip &&\
   unzip awscliv2.zip &&\
   ./aws/install
+
 
 COPY terraformrc /home/dojo/.terraformrc
 RUN chown dojo:dojo /home/dojo/.terraformrc

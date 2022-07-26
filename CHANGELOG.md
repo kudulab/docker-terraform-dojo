@@ -3,6 +3,7 @@
 * split the task build into build and push
 * terraform 1.2.3
 * alpine 3.16
+* fix installing correct aws provider version, bump from 3.42.0 to 3.75.2
 
 ### 1.6.2 (2022-Jun-22)
 
