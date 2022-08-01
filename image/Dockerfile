@@ -45,7 +45,7 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 # install plugins
 ENV TF_PROVIDER_CONSUL_VERSION="2.12.0" \
   TF_PROVIDER_OPENSTACK_VERSION="1.42.0" \
-  TF_PROVIDER_AWS_VERSION="3.75.2" \
+  TF_PROVIDER_AWS_VERSION="4.24.0" \
   TF_PROVIDER_GOOGLE_VERSION="3.69.0" \
   TF_PROVIDER_NULL_VERSION="3.1.1" \
   TF_PROVIDER_EXTERNAL_VERSION="2.1.0" \
@@ -124,7 +124,7 @@ RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
 # AWC CLI version 2 changelog: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst
 RUN apk add --no-cache unzip gnupg nano
 COPY aws.gpg /opt/aws.gpg
-ENV GLIBC_VER=2.31-r0 AWS_CLI_VERSION=2.4.5
+ENV GLIBC_VER=2.31-r0 AWS_CLI_VERSION=2.7.20
 RUN apk --no-cache add \
         binutils \
         curl \

@@ -1,3 +1,8 @@
+### 1.8.0 (2022-Aug-01)
+
+* AWS CLI 2.7.20
+* Terraform AWS provider 4.24.0
+
 ### 1.7.0 (2022-Jul-26)
 
 * split the task build into build and push

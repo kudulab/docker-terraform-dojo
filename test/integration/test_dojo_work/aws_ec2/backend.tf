@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     aws = {
-      version = "= 3.75.2"
+      version = "= 4.24.0"
     }
     null = {
       version = "= 3.1.1"
