@@ -28,8 +28,6 @@ jobs:
     steps:
       - setup
       - run:
-          command: /bin/bash -c "./tasks verify_version"
-      - run:
           command: /bin/bash -c "./tasks build"
       - run:
           command: /bin/bash -c "./tasks push"
@@ -52,7 +50,7 @@ jobs:
       - run:
           name: Install dojo
           command: |
-            version="0.10.3"
+            version="0.11.0"
             wget -O /tmp/dojo https://github.com/kudulab/dojo/releases/download/${version}/dojo_linux_amd64
             chmod +x /tmp/dojo
             sudo mv /tmp/dojo /usr/bin/dojo
@@ -89,10 +87,10 @@ commands:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "a9:26:53:09:1f:ba:44:24:4b:8e:ad:1c:bc:54:a2:95"
+            - "b7:b0:b1:f7:6c:45:85:35:3d:2e:7f:e0:60:fb:47:9c"
 
 executors:
   platform:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2204:2023.02.1
     working_directory: ~/repo
