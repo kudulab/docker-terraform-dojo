@@ -11,7 +11,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
   rm -r /tmp/dojo_git
 ############
 
-ENV TERRAFORM_VERSION=1.2.3
+ENV TERRAFORM_VERSION=1.5.6
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -43,16 +43,16 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
   rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
-ENV TF_PROVIDER_CONSUL_VERSION="2.12.0" \
-  TF_PROVIDER_OPENSTACK_VERSION="1.42.0" \
-  TF_PROVIDER_AWS_VERSION="4.24.0" \
-  TF_PROVIDER_GOOGLE_VERSION="3.69.0" \
-  TF_PROVIDER_NULL_VERSION="3.1.1" \
+ENV TF_PROVIDER_CONSUL_VERSION="2.18.0" \
+  TF_PROVIDER_OPENSTACK_VERSION="1.52.1" \
+  TF_PROVIDER_AWS_VERSION="5.14.0" \
+  TF_PROVIDER_GOOGLE_VERSION="4.79.0" \
+  TF_PROVIDER_NULL_VERSION="3.2.1" \
   TF_PROVIDER_EXTERNAL_VERSION="2.1.0" \
-  TF_PROVIDER_LOCAL_VERSION="2.1.0" \
+  TF_PROVIDER_LOCAL_VERSION="2.4.0" \
   TF_PROVIDER_TEMPLATE_VERSION="2.2.0" \
-  TF_PROVIDER_TIME_VERSION="0.7.1" \
-  TF_PROVIDER_VAULT_VERSION="2.20.0"
+  TF_PROVIDER_TIME_VERSION="0.9.1" \
+  TF_PROVIDER_VAULT_VERSION="3.19.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
 
   wget https://releases.hashicorp.com/terraform-provider-openstack/$TF_PROVIDER_OPENSTACK_VERSION/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
@@ -124,14 +124,14 @@ RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
 # AWC CLI version 2 changelog: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst
 RUN apk add --no-cache unzip gnupg nano
 COPY aws.gpg /opt/aws.gpg
-ENV GLIBC_VER=2.31-r0 AWS_CLI_VERSION=2.7.20
+ENV GLIBC_VER=2.34-r0 AWS_CLI_VERSION=2.13.12
 RUN apk --no-cache add \
         binutils \
         curl \
     && curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
     && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-${GLIBC_VER}.apk \
     && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-bin-${GLIBC_VER}.apk \
-    && apk add --no-cache \
+    && apk add --no-cache --force-overwrite \
         glibc-${GLIBC_VER}.apk \
         glibc-bin-${GLIBC_VER}.apk &&\
   curl -o awscliv2.sig https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_CLI_VERSION}.zip.sig &&\
