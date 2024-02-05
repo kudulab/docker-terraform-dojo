@@ -1,3 +1,4 @@
+* new base image alpine:3.19
 ### 1.9.0 (2023-Aug-27)
 * Terraform 1.5.6
 * Terraform AWS provider 5.14.0
