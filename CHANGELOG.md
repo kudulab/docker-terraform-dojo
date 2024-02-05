@@ -1,4 +1,9 @@
+### 1.9.1 (2024-Feb-06)
+
 * new base image alpine:3.19
+* use Dojo image scripts 0.13.0
+* limit output from this image init scripts
+
 ### 1.9.0 (2023-Aug-27)
 * Terraform 1.5.6
 * Terraform AWS provider 5.14.0
