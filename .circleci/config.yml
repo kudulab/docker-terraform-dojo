@@ -87,7 +87,8 @@ commands:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "b7:b0:b1:f7:6c:45:85:35:3d:2e:7f:e0:60:fb:47:9c"
+            # get it with: ssh-keygen -E md5 -lf ~/.ssh/the-key-name
+            - "21:2d:df:c0:2a:a6:b8:ba:0b:40:fd:93:b7:03:0d:33"
 
 executors:
   platform:
