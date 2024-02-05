@@ -1,6 +1,8 @@
 ### 1.9.1 (2024-Feb-06)
 
-* new base image alpine:3.19
+* new base image alpine:3.18
+ (let's not update to alpine:3.19 because of a segmentation fault
+ when running aws cli https://github.com/aws/aws-cli/issues/8423)
 * use Dojo image scripts 0.13.0
 * limit output from this image init scripts
 
