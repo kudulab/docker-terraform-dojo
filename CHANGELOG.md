@@ -1,3 +1,15 @@
+### 1.10.0 (2024-Aug-12)
+* Terraform 1.9.1
+* Terraform AWS provider 5.62.0
+* Terraform GCP provider 5.40.0
+* Terraform Consul provider 2.21.0
+* Terraform OpenStack provider 1.54.0
+* Terraform Vault provider 4.4.0
+* Terraform time provider 0.12.0
+* Terraform local provider 2.5.1
+* Terraform null provider 3.2.2
+* AWS CLI 2.17.27
+
 ### 1.9.1 (2024-Feb-06)
 
 * new base image alpine:3.18
