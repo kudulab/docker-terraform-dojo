@@ -1,3 +1,15 @@
+### 1.11.0 (2025-Apr-08)
+
+* Terraform 1.11.3
+* Terraform AWS provider 5.94.1
+* Terraform GCP provider 6.28.0
+* Terraform OpenStack provider 2.1.0
+* Terraform Vault provider 4.7.0
+* Terraform time provider 0.13.0
+* Terraform local provider 2.5.2
+* Terraform null provider 3.2.3
+* AWS CLI 2.25.12
+
 ### 1.10.0 (2024-Aug-12)
 * Terraform 1.9.1
 * Terraform AWS provider 5.62.0

@@ -11,7 +11,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
   rm -r /tmp/dojo_git
 ############
 
-ENV TERRAFORM_VERSION=1.9.1
+ENV TERRAFORM_VERSION=1.11.3
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -44,18 +44,17 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 
 # install plugins
 ENV TF_PROVIDER_CONSUL_VERSION="2.21.0" \
-  TF_PROVIDER_OPENSTACK_VERSION="1.54.0" \
-  TF_PROVIDER_AWS_VERSION="5.62.0" \
-  TF_PROVIDER_GOOGLE_VERSION="5.40.0" \
-  TF_PROVIDER_NULL_VERSION="3.2.2" \
+  TF_PROVIDER_OPENSTACK_VERSION="2.1.0" \
+  TF_PROVIDER_AWS_VERSION="5.94.1" \
+  TF_PROVIDER_GOOGLE_VERSION="6.28.0" \
+  TF_PROVIDER_NULL_VERSION="3.2.3" \
   TF_PROVIDER_EXTERNAL_VERSION="2.3.3" \
-  TF_PROVIDER_LOCAL_VERSION="2.5.1" \
+  TF_PROVIDER_LOCAL_VERSION="2.5.2" \
   TF_PROVIDER_TEMPLATE_VERSION="2.2.0" \
-  TF_PROVIDER_TIME_VERSION="0.12.0" \
-  TF_PROVIDER_VAULT_VERSION="4.4.0"
+  TF_PROVIDER_TIME_VERSION="0.13.0" \
+  TF_PROVIDER_VAULT_VERSION="4.7.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
-
-  wget https://releases.hashicorp.com/terraform-provider-openstack/$TF_PROVIDER_OPENSTACK_VERSION/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
+  wget https://github.com/terraform-provider-openstack/terraform-provider-openstack/releases/download/v${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   unzip -o terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   rm terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   mkdir -p /home/dojo/.terraform.d/plugin-cache//registry.terraform.io/terraform-provider-openstack/openstack/${TF_PROVIDER_OPENSTACK_VERSION}/linux_amd64 && \
@@ -124,7 +123,7 @@ RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
 # AWC CLI version 2 changelog: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst
 RUN apk add --no-cache unzip gnupg nano
 COPY aws.gpg /opt/aws.gpg
-ENV GLIBC_VER=2.34-r0 AWS_CLI_VERSION=2.17.27
+ENV GLIBC_VER=2.34-r0 AWS_CLI_VERSION=2.25.12
 RUN apk --no-cache add \
         binutils \
         curl \

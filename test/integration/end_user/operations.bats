@@ -16,7 +16,7 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "dojo -c Dojofile.to_be_tested \"terraform --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "Terraform v1.9.1"
+  assert_line --partial "Terraform v1.11.3"
   assert_equal "$status" 0
 }
 @test "openstack env variables are preserved" {
@@ -102,6 +102,6 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "dojo -c Dojofile.to_be_tested \"aws --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "aws-cli/2.17.27"
+  assert_line --partial "aws-cli/2.25.12"
   assert_equal "$status" 0
 }
