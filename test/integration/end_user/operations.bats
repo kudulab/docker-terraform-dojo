@@ -102,6 +102,6 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "dojo -c Dojofile.to_be_tested \"aws --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "aws-cli/2.25.12"
+  assert_line --partial "aws-cli/2.22.10"
   assert_equal "$status" 0
 }

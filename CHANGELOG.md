@@ -1,3 +1,8 @@
+### 1.12.0 (2025-Apr-08)
+
+* new base image alpine:3.21.3
+* AWS CLI decreased to 2.22.10 to make it work with the base image
+
 ### 1.11.0 (2025-Apr-08)
 
 * Terraform 1.11.3
