@@ -1,17 +1,18 @@
-FROM alpine:3.21.3
+FROM alpine:3.23.0
 
 ############
 # For Dojo:
 # * entrypoint requires sudo and shadow
 # * git is needed to install dojo image configs
+ENV DOJO_VERSION=0.12.1
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git && \
-  git clone --depth 1 -b 0.13.0 https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
+  git clone --depth 1 -b ${DOJO_VERSION} https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
   /tmp/dojo_git/image_scripts/src/install.sh && \
   rm -r /tmp/dojo_git
 ############
 
-ENV TERRAFORM_VERSION=1.11.3
+ENV TERRAFORM_VERSION=1.14.1
 
 # * font-bitstream-type1 is for graphviz, without it, when generating a png file,
 # the text just ends up being a string of boxes
@@ -43,16 +44,16 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
   rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # install plugins
-ENV TF_PROVIDER_CONSUL_VERSION="2.21.0" \
-  TF_PROVIDER_OPENSTACK_VERSION="2.1.0" \
-  TF_PROVIDER_AWS_VERSION="5.94.1" \
-  TF_PROVIDER_GOOGLE_VERSION="6.28.0" \
-  TF_PROVIDER_NULL_VERSION="3.2.3" \
-  TF_PROVIDER_EXTERNAL_VERSION="2.3.3" \
-  TF_PROVIDER_LOCAL_VERSION="2.5.2" \
+ENV TF_PROVIDER_CONSUL_VERSION="2.22.1" \
+  TF_PROVIDER_OPENSTACK_VERSION="3.4.0" \
+  TF_PROVIDER_AWS_VERSION="6.25.0" \
+  TF_PROVIDER_GOOGLE_VERSION="7.12.0" \
+  TF_PROVIDER_NULL_VERSION="3.2.4" \
+  TF_PROVIDER_EXTERNAL_VERSION="2.3.5" \
+  TF_PROVIDER_LOCAL_VERSION="2.6.1" \
   TF_PROVIDER_TEMPLATE_VERSION="2.2.0" \
-  TF_PROVIDER_TIME_VERSION="0.13.0" \
-  TF_PROVIDER_VAULT_VERSION="4.7.0"
+  TF_PROVIDER_TIME_VERSION="0.13.1" \
+  TF_PROVIDER_VAULT_VERSION="5.6.0"
 RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
   wget https://github.com/terraform-provider-openstack/terraform-provider-openstack/releases/download/v${TF_PROVIDER_OPENSTACK_VERSION}/terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
   unzip -o terraform-provider-openstack_${TF_PROVIDER_OPENSTACK_VERSION}_linux_amd64.zip &&\
@@ -116,7 +117,7 @@ RUN mkdir -p /home/dojo/.terraform.d/plugin-cache/ && cd /tmp &&\
 
   chown dojo:dojo -R /home/dojo/.terraform.d/
 
-ENV AWS_CLI_VERSION=2.22.10-r0
+ENV AWS_CLI_VERSION=2.32.12-r0
 RUN apk update && apk add --no-cache aws-cli=${AWS_CLI_VERSION}
 
 COPY terraformrc /home/dojo/.terraformrc
